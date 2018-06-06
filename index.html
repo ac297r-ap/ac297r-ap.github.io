@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+  <title>About AP Project</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/simple-sidebar.css" rel="stylesheet">
+
+  <!-- Our styles -->
+  <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div id="wrapper" class="toggled">
+
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a href="#">Menu
+        </a>
+      </li>
+      <li>
+        <a href="#aboutAP">About the AP</a>
+      </li>
+      <li>
+        <a href="#overview">Project Overview</a>
+      </li>
+      <li>
+        <a href="#data">Data</a>
+      </li>
+      <li>
+        <a href="#modeling">Modeling</a>
+      </li>
+      <li>
+        <a href="#tool">Tool</a>
+      </li>
+      <li>
+        <a href="#process">Our Process</a>
+      </li>
+      <li>
+        <a href="#results">Results</a>
+      </li>
+      <li>
+        <a href="#futurework">Future Work</a>
+      </li>
+      <li>
+        <a href="#references">References</a>
+      </li>
+      <li>
+        <a href="#contact">Contact</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Page Content -->
+  <!-- Intro -->
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <img src="img/SEAS_IACS.png" style="max-height: 125px; padding-left: 10px; padding-bottom: 10px"/>
+          <h1>Associated Press Capstone Project:</h1>
+          <h1>Building Metadata Ground Truth</h1>
+          <p>
+            Welcome to our Harvard University, School of Engineering and Applied Sciences (SEAS), Institute
+            for Applied Compuatational Science (IACS), Spring 2018 - AC297R Capstone Project.
+          </p>
+          <p>
+            Please see the <a href="#contact">contact</a> section at the end of this page to contact any
+            member of our team.
+          </p>
+          <p>
+            <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
+          </p>
+        </div>
+      </div>
+      <hr>
+
+      <!-- About AP Section -->
+      <div id="aboutAP" class="row section">
+        <div class="col col-md-12"><h2>About the Associated Press (AP)</h2></div>
+      </div>
+      <div class="row">
+        <div class="col col-md-12">
+          <p>
+            The AP is an independent non-profit news cooperative headquartered in New York City. While the
+            organization is well known for its reporting and journalism, it also offers a suite of metadata
+            services. Clients can submit their own content to receive relevant metadata tags in order to
+            identify important topics, increase search relevance, and deliver targeted results. The current
+            metadata system tags approximately 100,000 pieces of media content every day.
+          </p>
+          <p>
+            For more information about the AP and its metadata services, please see our <a
+              href="#references">references</a>.
+          </p>
+        </div>
+      </div>
+      <hr>
+
+      <!-- Project Overview Section -->
+      <div id="overview" class="row section">
+        <div class="col col-md-12"><h2>Project Overview</h2></div>
+      </div>
+      <div class="row">
+        <div class="col col-md-6">
+          <p>
+            <b>Existing System</b><br>
+            Currently, the AP Tagging Service returns tags from a list of standardized vocabularies known as
+            the AP News Taxonomy. The News Taxonomy is a set of hierarchically structured topics and names
+            across five broad categories: Person, Geography, Company, Organization, and Subject. Person contains
+            a list of individuals who are well-known nationally or globablly, with a special focus on the United
+            States. Geography is a set of hierarchical place names, ranging from continents and countries to
+            cities and towns. Company contains over 50,000 publicly traded companies, while Organization focuses
+            on a diverse range of sectors, from government organizations and political institutions to
+            universities and sports teams. Subject contains broad topics like Crime to the specific
+            subtopics like illegal firearms. In total, there are over 165,000 possible tags. These lists are
+            manually maintained and updated.
+
+            The Tagging Service identifies phrases in submitted content that match items in the News
+            Taxonomy. It also uses a set of manually-created if-then rules to identify other topics that
+            might apply. These tags are added as metadata at the beginning of each piece of content passed
+            through the AP's system.
+
+            <a href="#figure1">Figure 1</a> shows a preview of the rules used by AP's current system.
+          </p>
+          <p>
+            <b>Current Limitations</b><br>
+            We identified three main limitations in the AP's current tagging system.
+
+            First, the existing human-created if-then rules are lengthy, complicated to write, and difficult
+            to maintain. They also generally rely on simple checks such as the presence or absence of
+            certain words, which, without context, can lead to mistakes. One example of this can be seen in
+            <a href="#figure2">Figure 2</a>. This article is about the <a
+              href="https://en.wikipedia.org/wiki/USS_Constitution"
+              target="_blank">USS Constitution</a>, a wooden-hulled, three-masted heavy frigate of the United
+            States Navy, named after the US Constitution. The article itself does not have anything to do with
+            the US Constitution, but the first topic highlighted by AP's metadata system is "Constitutions,"
+            which is clearly incorrect.
+          </p>
+          <p>
+          </p>
+          <p>
+            In addition to the rules, the entire set of possible tags depends on manual maintenance. If a
+            person does not add a tag to the News Taxonomy, it will never appear in metadata, no matter how
+            relevant it may be to an article. For example, this flaw is particularly apparent in sports
+            articles, which <a href="#visualized_data">comprise a majority</a> of all coverage. Teams and
+            player rosters change frequently, and if someone is not constantly updating the News Taxonomy,
+            the appropriate people and organizations will not be identified and tagged accordingly.
+          </p>
+          <p>
+            Finally, the existing tagging system can only identify the presence or
+            absence of a topic. This binary system cannot score, rank, or sort the topics it identifies.
+            This makes it impossible to understand the degree to which a particular piece of content is
+            about​ a given topic.
+          </p>
+          <p>
+            Overall, these limitations we found are certainly not desirable, as they could lead to inaccurate
+            search results, ultimately reducing the disoverability of content and increasing the number of
+            customer complaints the AP receives.
+          </p>
+        </div>
+        <div class="col col-md-6">
+          <img src="img/rules.png" align="center" class="img" id="figure1"><br>
+          <p class="caption">Fig 1. A preview of AP's rules</p>
+          <img src="img/constitution.png" align="center" class="img" id="figure2"><br>
+          <p class="caption">Fig 2. AP Article about the USS Constitution</p>
+        </div>
+      </div>
+
+      <!-- Motivation -->
+      <div class="row">
+        <div class="col col-md-12">
+          <p>
+            <b>Addional Motivations</b><br>
+            In order to create a better tagging system, we need to first understand what "better" means.
+            This is why an important aspect of our project is the idea of "ground truth." Aside from
+            anecdotes and discovered examples like the USS Constitution article <a href="#figure2">above</a>,
+            we do not have any measure of the accuracy of the AP's current taxonomy and metadata tagging system.
+            The AP's current methods involve spot-checking current rules and monitoring customer complaints to
+            measure how well their taxonomy identifies topics and entities within content. They do not have
+            a formal set of "ground truth" or "gold standard" good and bad tagging examples, which would be
+            useful for more advanced tagging systems involving supervised learning.
+          </p>
+          <p>
+            Thus, an important goal for our project is the ability for the AP and their clients to record
+            feedback of both their current tagging system, as well as our project's topic and named entity
+            identification system. This allows individuals to identify good tags and bad tags for any given
+            article and save those in a log. This will ultimately assist in building a ground truth dataset,
+            and hopefully lead to employing semi-supervised methods to dynamically score and rank tags
+            globally across a corpus of content.
+          </p>
+          <p>
+            These limitations and motivations lead us to the following problem statement:
+          </p>
+          <h3 style="color: #ed473b">How can we increase the AP's metadata accuracy and filter relevant tags
+            in order to improve article discoverability, reduce customer complaints, and build ground
+            truth?</h3>
+        </div>
+      </div>
+      <hr>
+
+      <!-- Data Section-->
+      <div id="data" class="row">
+
+        <!-- Raw Data-->
+        <div class="col col-md-12">
+          <h2>Description of Data</h2>
+          <p>
+            <b>Raw Data</b><br>
+            In its raw form, the data we used for this project is a corpus of 50,000 .xml files. Each
+            file is an AP news article that has been passed through the AP Tagging Service and
+            enriched with metadata from the News Taxonomy. Our corpus contains articles published between
+            September 2017 and February 2018. <a href="#figure3">Figure 3</a> contains an excerpt from one such .xml
+            file, showing
+            the "SubjectClassification" tags for that particular article.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-md-12">
+          <img src="img/xml.png" align="center" class="img" id="figure3"><br>
+          <p class="caption">Fig 3. A look at our .xml data and its metadata tags</p>
+        </div>
+      </div>
+
+      <!-- Processed Data -->
+      <div class="row">
+        <div class="col col-md-12">
+          <p>
+            <b>Processed Data</b><br>
+            To explore the raw data, we parsed each file based on its xml structure. We wrote
+            Python scripts to parse each article into a row of a Pandas DataFrame. This format allowed us
+            to conduct an exploratory data analysis of our corpus, seen in <a href="#figure4">Figure 4</a>.
+            We also initially saved the body of each article as an individual .txt file in order to apply
+            the <a href="#modeling">modeling</a> methods outlined below. For our analysis, we focus specifically
+            on AP-generated tags categorized as "SubjectClassification" and "EntityClassification." We refer to
+            these as subject and entity tags, respectively.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-md-12">
+          <img src="img/corpusdf.png" align="center" class="img" id="figure4"><br>
+          <p class="caption">Fig 4. Raw data parsed into a Pandas DataFrame</p>
+          <p>
+            For the final tagging, scoring, and sorting tool, we use the original .xml file in order to
+            decrease processing time. More details on these methods can be found <a href="#process">below</a>.
+          </p>
+        </div>
+      </div>
+
+      <!-- EDA -->
+      <div class="row">
+        <div id="visualized_data" class="col col-md-6">
+          <p>
+            <b>Visualized Data</b>
+            <br>
+            When we plot the frequency of subject tags in the corpus, as displayed in <a href="#figure5">Figure 5</a>,
+            we see the majority of articles are tagged with "Sports," "General News," or "Government and Politics."
+            This is not surprising, but gives us important information about the distribution of tags within our
+            corpus.
+          </p>
+          <p>
+            There are also many single letter tags like "s," "a," and "n." These tags are a part of
+            <a href="http://www.eznews.com/help/ezsend/index.html?ANPAStandard" target="_blank">an international
+              standard</a>
+            developed by the International Press Telecommunications Council and Newspapers Association of America,
+            formerly known as the American Newspaper Publishers Association (ANPA). They refer to categories such as "s"
+            - Sports,
+            including packages, "a" - Domestic, non-Washington, general news item, "n" - State and regional.
+            These tags are commonly included to increase search relevance of AP articles.
+          </p>
+          <p>
+            It is also important to note that for any given article, there is often significant double tagging for
+            certain categories such as "Sports" or "General News".
+          </p>
+        </div>
+        <div class="col col-md-6">
+          <img src="img/subjecttags.png" align="center" class="img" id="figure5"><br>
+          <p class="caption">Fig 5. Corpus Subject Tags</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p>
+            The "EntityClassification" tags, seen in <a href="#figure6">Figure 6</a>, contain more descriptive
+            information.
+            They identify proper nouns - people, places, things - a particular article is
+            about.
+          </p>
+          <p>
+            As our corpus contains strictly English-language content, it follows that the majority of
+            articles have entity tags such as "North America" and "United States." Since our corpus contains
+            stories from a very politicized time period, "Donald Trump" shows up at the sixth most
+            frequent entity tag followed by "National Football League."
+          </p>
+          <p>
+            Here we display only the most common entity tags. As noted <a href="#overview">above</a>, there are
+            thousands more
+            within the AP's News Taxonomy.
+          </p>
+        </div>
+        <div class="col-md-6">
+          <img src="img/entitytags.png" align="center" class="img" id="figure6"><br>
+          <p class="caption">Fig 6. Corpus Entity Tags</p>
+        </div>
+      </div>
+      <hr>
+
+      <!--Modeling section-->
+      <div id="modeling" class="row">
+        <div class="col col-md-12"><h2>Modeling</h2></div>
+      </div>
+
+      <div class="row">
+        <div class="col col-md-12">
+          <p>
+            <b>Identifying & scoring tags</b><br>
+            Throughout this project we explored multiple methods for identifying and scoring tags within
+            each article. An important scoring tool design consideration was identifying tags that are both
+            locally important (within each article headline and body), as well as globally important (within
+            our corpus of articles). To that end, we used named entity extraction to identify key terms in each
+            document, and then compute a term frequency-inverse document weight for each of these terms. We combine this
+            score with an additional score based on article heuristics to return a list of ranked tags.
+          </p>
+        </div>
+      </div>
+
+      <!--Named Entity Extraction-->
+      <div class="row">
+        <div id="namedentity" class="col col-md-6">
+          <p>
+            <b>Named Entity Extraction</b><br>
+            People, places, organizations, and companies are all examples of named entities. We use this concept
+            to help determine what a given article is about. Named-entity extraction (NEE) is the process of identifying
+            and isolating these types of proper nouns from a piece of text. We use the Python library
+            <a href="https://spacy.io/" target="_blank">Spacy</a> to extract entities from each article in our corpus.
+            We intentionally chose to focus on identifying tags based on named entities (similar to the AP's Person,
+            Company,
+            Organization, and Geography tags) instead of placing articles into broader categories (like the AP subject
+            tags),
+            with the understanding that the former may also be helpful in determining the latter.
+          </p>
+          <p>
+            Simply extracting a named entity from an article extablishes its local importance, but this is not enough.
+            For
+            example, many articles may mention a person's name, particularly a common one such as Hillary Clinton,
+            without
+            necessarily being about that term. Thus, it is important to have some measure of the global importance of a
+            term,
+            relative to other articles.
+          </p>
+        </div>
+        <div class="col col-md-6">
+          <img src="img/nee.png" align="center" class="img" id="figure7"><br>
+          <p class="caption">Fig 7. Named entity extraction example</p>
+        </div>
+      </div>
+
+      <!--TF-IDF-->
+      <div class="row">
+        <div id="tfidf" class="col col-md-6">
+          <p>
+            <b>Term Frequency-Inverse Document Frequency></b><br>
+            Every word that appears in a document is not necessarily important for understanding what that
+            document is about. For example, words like "the" or "a" help put a cohesive sentence together,
+            but do not give us information regarding what an article is really about. Term Frequency-Inverse
+            Document Frequency (TF-IDF) is a way of determining the importance of a term within a document
+            and across a corpus of documents.
+          </p>
+          <p>
+            Our corpus, as outlined above, contains 50,000 articles. For any word in one of those articles,
+            "term frequency" is the number of times that word occurs in that individual document. The
+            "inverse document frequency" is the logarithm of the total number of documents in the corpus
+            divided by the number of documents that contain that specific word. In other words, term
+            frequency signifies how significant a particular word is within a document, and the inverse
+            document frequency of that term represents its significance
+            in the entire corpus.
+          </p>
+          <p>
+            The product of the term frequency and the inverse document frequency can tell us how rare a word
+            is: the higher the score, the more special it is in that document. As mentioned earlier, a key consideration
+            of the
+            scoring tool must be to analyze a tag’s importance locally as well as globally. TF-IDF helps us
+            achieve that.
+          </p>
+        </div>
+        <div class="col col-md-6">
+          <img src="img/tfidf.png" align="center" class="img" id="figure8"><br>
+          <p class="caption">Fig 8. TF-IDF formula</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-md-12">
+          <p><b>Article Heuristics</b><br>
+            As previously noted, we also apply article heuristics to augment each entity's TF-IDF score. For
+            example,
+            if an entity shows up at the beginning or headline of an article, its score will be increased,
+            and vice
+            versa for entities that show up towards the end of an article. The rationale for this
+            augmentation being that articles typically have their principal topics mentioned earlier in an
+            article's body. These simple scoring heuristics are easily expanded and tuned.
+          </p>
+        </div>
+      </div>
+
+      <!-- Text Rank -->
+      <div class="row">
+        <div id="textrank" class="col col-md-12">
+          <p>
+            <b>TextRank</b><br>
+            TextRank is an algorithm developed by <a href="http://www.aclweb.org/anthology/W04-3252">Mihaelcea and
+            Tarau </a>
+            that identifies keywords within a single document. It creates a graph with all words from a document
+            that may be possible keywords as vertices, and adds edges between two vertices (two possible keywords)
+            if they occur within a certain window of a predefined size (typically between 2 and 10 words).
+            An edge would be weighted by the number of times the possible keywords occur within the same window.
+            The computation for the TextRank score for the vertices repeats until values converge.
+          </p>
+          <p>
+            TextRank looks at the structure of each article in isolation, while TF-IDF looks at the
+            counts of terms within an article as well as the entire corpus of articles. For this reason we
+            hypothesized that they may work well together. We initially implemented a version of TextRank in which the
+            scoring mechanism for the possible keywords was weighted by a TF-IDF score, but we eventually
+            decided not to continue with this approach because the tags generated with named entity
+            extraction and TF-IDF were more relevant.
+          </p>
+        </div>
+      </div>
+      <hr>
+
+      <!--Tool-->
+      <div id="tool" class="row">
+        <div class="col-md-12"><h2>Tool</h2></div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p>
+            Below you can see a screenshot of our project's final tag comparison tool. There are three ways
+            to view the AP's and our tags:
+          </p>
+          <ol>
+            <li>Entering a headline and body text of an article</li>
+            <li>Using the article ID of an article in the local corpus directory</li>
+            <li>Choosing a random article from the corpus</li>
+          </ol>
+          <p>
+            We recommend using the random article functionality to fully appreciate how the AP's and our
+            system's tagging works.
+          </p>
+          <p>
+            You will notice thumbs pointing up and down next to each tag for both the AP's and our system's
+            tags. By selecting those thumbs you save a vote for or against that tag for that article. These
+            votes are saved in JSON and will be incorporated into a future semi-supervised method of
+            dynamically sorting, ranking, and recommending more tags.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-md-12">
+          <img src="img/tool.png" align="center" class="img tool_img"><br>
+          <p class="caption">Fig 10. Comparison Tool</p>
+        </div>
+      </div>
+
+      <!-- Process Section -->
+      <div id="process" class="row">
+        <div class="col col-md-12"><h2>Our Process</h2></div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <img src="img/pipeline.png" align="center" class="img" id="figure9"><br>
+          <p class="caption">Fig 9. Data Pipeline</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-md-12">
+
+          <!-- Overview -->
+          <p>
+            <b>Overview</b>
+            <br>
+            This project is a RESTful API, built with Python and Flask, and containerized with Docker. It
+            incorporates a modular design, separating the parsing, tag identification, scoring, and sorting
+            of media files from the web application itself. We use both
+            <a href="https://aws.amazon.com/" target="_blank">Amazon Web Services (AWS)</a> when building
+            our TF-IDF matrix and the AP's
+            <a href="https://developer.ap.org/ap-metadata-services" target="_blank">Metadata Services</a>
+            API for tagging new content.
+          </p>
+          <p>
+            Our application uses six primary modules:
+          </p>
+          <ol>
+            <li>
+              <a href="#count_entities.py">count_entities.py</a>
+            </li>
+            <li>
+              <a href="#create_matrix.py">create_matrix.py</a>
+            </li>
+            <li>
+              <a href="#article.py">article.py</a>
+            </li>
+            <li>
+              <a href="#api.py">api.py</a>
+            </li>
+            <li>
+              <a href="#app.js">app.js</a>
+            </li>
+            <li>
+              <a href="#compare.html">compare.html</a>
+            </li>
+          </ol>
+          <p>
+            This modular design is illustrated above in Figure 9 and explained in detail below. In our
+            project, the media files we are using as a corpus are XML news articles previously enriched
+            by AP's metadata tagging service.
+          </p>
+
+          <!-- System Requirement -->
+          <p>
+            <b>System requirements</b>
+          </p>
+          <ul>
+            <li>
+              A current version of <a href="https://www.docker.com/get-docker" target="_blank">docker</a>
+            </li>
+            <li>
+              <a href="https://www.python.org/downloads/" target="_blank">Python</a> version 3.6 or higher
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Installation -->
+      <div class="row">
+        <div class="col col-md-12">
+          <b>Tool Installation</b>
+          <br>
+          To install the tag comparison and validation tool on your local system follow these steps:
+          <ol>
+            <li>Clone this repository using <code>$ git clone https://github.com/aefernandes/ac297r.git</code></li>
+            <li>Navigate to the cloned repository</li>
+            <li>Run <code>make data</code> to create the data directories (not stored in version control)</li>
+            <li>Copy any number of article XML files into the new raw data directory — these are assumed to be named
+              exactly as they were given to us, i.e. `<code>{articleid}.xml</code>.
+            </li>
+            <li>Run <code>docker-compose build</code> to build the images.</li>
+            <li>Run <code>docker-compose up pipeline</code> to do the IDF pre-processing step.</li>
+            <li>Run <code>docker-compose up web</code> to do the IDF pre-processing step.</li>
+            <li>Navigate to <a href="http://localhost:5000/" class="uri">http://localhost:5000/</a> in your browser</li>
+            <li>By default, user feedback will be persisted to <code>feedback.json</code>, but this can easily be
+              pointed to output to a relational database.
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Modules -->
+      <div class="row">
+        <div class="col col-md-12">
+          <p>
+            <b>Modules in detail</b>
+          </p>
+
+          <!-- count_entities.py -->
+          <p id="count_entities.py">
+            <b>count_entities.py</b>This module runs as a standalone script which computes the named entities
+            for each article and seralizes them to disk as an intermediate, compute-intensive step before
+            the "matrix" of document counts and IDF scores. This module was run on an AWS
+            <a href="https://aws.amazon.com/ec2/instance-types/g3/" target="_blank">g3.4xlarge</a>
+            instance in order to reduce compute time and ensure adequate memory capacity.
+          </p>
+
+          <!-- create_matrix.py -->
+          <p id="create_matrix.py">
+            <b>create_matrix.py</b>This module runs as a separate utility to generate a scoring matrix based
+            on the counts precomputed by <a href="#count_entities.py">count_entities.py</a>. This helps in
+            fast calculation of TF-IDF score of tags at run-time. This module was run on an AWS
+            <a href="https://aws.amazon.com/ec2/instance-types/g3/" target="_blank">g3.4xlarge</a>
+            instance in order to reduce compute time and ensure adequate memory capacity.
+          </p>
+
+          <!-- article.py -->
+          <p id="article.py">
+            <b>article.py: </b>This module is a wrapper around the actual article data covering every aspect
+            of parsing, extracting tags, and other housekeeping. For the purposes of this project, it assumes
+            that it will be processing an XML file on disk somewhere, but can easily be adapted by the AP to
+            process files in cloud filesystems like S3, HDFS, or even stored over the network.
+          </p>
+
+          <!-- api.py -->
+          <p id="api.py">
+            <b>api.py: </b>This is the top-level module in our application. It binds the frontend with the
+            backend. The route() decorators in this class tell Flask which URL should trigger which
+            functions.
+          </p>
+
+          <!-- app.js -->
+          <p id="app.js">
+            <b>app.js: </b> This module has a number of JavaScript functions that connect the web
+            application frontend with the backend, and control how the html page is rendered.
+          </p>
+
+          <!-- compare.html -->
+          <p id="compare.html">
+            <b>compare.html: </b>This page defines the layout of our web application’s user-interface.
+          </p>
+        </div>
+      </div>
+      <hr>
+
+      <!--Results-->
+      <div id="results" class="row">
+        <div class="col col-md-12"><h2>Results & Analysis</h2></div>
+      </div>
+
+      <div class="row">
+        <div class="col col-md-12">
+          <p>
+            The following articles, with the AP's tags on the left and ours on the right, show some
+            interesting results when comparing our system's tags
+            with those identified by AP's taxonomy and metadata tagging system. The entities our system tags
+            are generally more specific than the entities from AP's metadata syste. We have applied votes
+            subjectively, and think these examples do an excellent job of showing the potential of our tool
+            as both an internal rule validation mechanism, as well as client rating system when they add new
+            content through the metadata tagging API.
+          </p>
+          <p>
+            Many more good examples can be found by using the "Random Article" button in the tool.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col col-md-12">
+          <p>
+            <b>Results Example 1: Maroon 5 Manager</b>
+            <br>
+            Below is an article about the death of Maroon 5 manager, Jordan
+            Feldstein. The AP's system picks up actor Jonah Hill, and musician
+            Rick Springfield, but misses the article's main topics - Jordan Feldstein and Maroon 5. Our
+            system
+            extracts those tags, as well as Career Artist Management, and Feldstein's other clients like
+            Miguel and Elle King. These tag differences and additions
+            are precisely the kind of feedback that would be helpful for management of rules, or
+            adding our system's tags to their metadata to increase search relevance.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-md-12">
+          <img src="img/results1.png" align="center" class="img tool_img"><br>
+          <p class="caption">Fig 11. Maroon 5 Manager Example</p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col col-md-12">
+          <p>
+            <b>Results Example 2: London Bombing "Hero"</b>
+            <br>
+            Below we see another good example of our system finding specific tags that the
+            AP's did not identify. The article is about the Ariana Grande concert bombings in London,
+            and specifically a 'hero' named Chris Parker.
+            The AP's system tags Ariana Grande and the bomber Salman Abedi, but misses ones our
+            system tags like Manchester Arena, Chris Parker (the main focus of the
+            article), Manchester Crown Court, and David Hernandez, a judge presiding over Parker's case.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-md-12">
+          <img src="img/results2.png" align="center" class="img tool_img"><br>
+          <p class="caption">Fig 12. London Bombing Example</p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col col-md-12">
+          <p>
+            <b>Results Example 3: Armistice Day</b>
+            <br>
+            Next we have an article about Armistice Day, and the French events surrounding it. The
+            AP's system tags locations and current and former presidents, but misses key topics like
+            Armistice Day, Champs-Elysees, World War I, George Clemenceau, and the Arc de Triomphe. This is
+            another excellent example of an article that could greatly increase its search relevance by
+            including our system's tags within metadata, as well as building ground truth for good tags to
+            have rules for.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-md-12">
+          <img src="img/results3.png" align="center" class="img tool_img"><br>
+          <p class="caption">Fig 13. Armistice Day Example</p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col col-md-12">
+          <p>
+            <b>Results Example 4: Egyptian Exchange</b>
+            <br>
+            Below we have another example of our system finding more specific and relevant tags than
+            the AP's system. The article is specifically about the Egyptian Exchange. It also has references
+            to Mohammed Farid, a prominent Egyptian political figure. These tags would be perfect to add
+            to this article's metadata, as well as build ground truth.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-md-12">
+          <img src="img/results4.png" align="center" class="img tool_img"><br>
+          <p class="caption">Fig 14. Egyptian Exchange Example</p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col col-md-12">
+          <p>
+            <b>Results Example 5: Police Shooting</b>
+            <br>
+            Our last example is about a police shooting in a small Ohio town. The AP's system
+            misses a number of relevant topics aside from the general geographic location of the article -
+            specifically the police officer, Bryan Eubanks, and the small town the officer worked in,
+            Newcomerstown. These two tags would greatly focus the search relevance of this article and
+            direct it to people who would most likely be searching for coverage specifically about Bryan
+            Eubanks and Newcomerstown.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-md-12">
+          <img src="img/results5.png" align="center" class="img tool_img"><br>
+          <p class="caption">Fig 15. Police Shooting Example</p>
+        </div>
+      </div>
+      <hr>
+
+      <!--Future Work-->
+      <div id="futurework" class="row">
+        <div class="col col-md-12"><h2>Recommendations & Future Work</h2></div>
+      </div>
+      <div class="row">
+        <div class="col col-md-12">
+          <p>
+            The primary goal of this project was to help the Associated Press establish ground truth as well
+            as
+            increase search relevance of articles. This system will be a great help to the AP in validating
+            the efficiency of their tagging rules, as well as
+            improve their metadata service product by incorporating our tags, as often
+            our system tags relevant entities the AP's tagging service did not.
+
+            We hope the Associated Press will utilize the feedback mechanism (thumbs up/down) to:
+          </p>
+          <ul>
+            <li>
+              Compare their tags with tags generated by our system
+            </li>
+            <li>
+              Check the efficacy of their tags and update their rules as required
+            </li>
+            <li>
+              Collect feedback from clients in a structured manner outside sporatic emails or phonecalls
+            </li>
+          </ul>
+          We have incorporated infrastructure to integrate the feedback mechanism into a bigger end-to-end
+          system to
+          which should allow the AP to use feedback more efficiently and effectively.
+          <p>
+            We recommend incorporating a semi-supervised system that
+            utilizes the feedback collected by our thumbs-up/thumbs-down feedback interface to automatically
+            recompute and update rankings of both our system's tags, as well as those from the AP's system.
+            That system
+            could also make recommendations for tags that were not included by our or AP's system.
+          </p>
+          <p>
+            We highly recommend that AP incorporate our system's tags into their metadata tagging
+            system. By adding our named entities to their metadata, they will increase search
+            relevance by including entities that may not be found in their current taxonomy.
+          </p>
+        </div>
+      </div>
+      <hr>
+
+      <!--References-->
+      <div id="references" class="row">
+        <div class="col col-md-12"><h2>References</h2></div>
+      </div>
+      <div class="row">
+        <div class="col col-md-12">
+          <ul>
+            <li>Harvard University's <a href="https://iacs.seas.harvard.edu/capstone" target="_blank">
+              IACS Capstone course</a>.
+            </li>
+            <li>This project's <a href="https://github.com/aefernandes/ac297r" target="_blank">GitHub
+              repository</a>.
+            </li>
+            <li>More about the <a href="https://www.ap.org/about/" target="_blank">Associated Press</a>.
+            </li>
+            <li>More about the AP's <a href="https://developer.ap.org/ap-metadata-services" target="_blank">Metadata
+              Services</a>.
+            </li>
+            <li>Website frameworks provided by <a
+                href="https://github.com/BlackrockDigital"
+                target="_blank">BlackrockDigital</a>.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+
+      <!--Contact-->
+      <div id="contact" class="row">
+        <div class="col col-md-12"><h2>Contact</h2></div>
+      </div>
+      <div class="row">
+        <div class="col col-md-12">
+          <p>This project was produced by the following students:</p>
+          <ul>
+            <li><a href="mailto:afernandes@college.harvard.edu">Anjali Fernandes</a></li>
+            <li><a href="mailto:andrewlund@g.harvard.edu">Andrew Lund</a></li>
+            <li><a href="mailto:divyam_misra@g.harvard.edu">Divyam Misra</a></li>
+            <li><a href="mailto:saxena@g.harvard.edu">Nripsuta Saxena</a></li>
+          </ul>
+          <p>Our team's Teaching Fellow was <a href="mailto:isaac@drivendata.org">Isaac Slavitt</a>,
+            co-founder and data scientist at <a href="https://www.drivendata.org/"
+                                                target="_blank">DrivenData</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Menu Toggle Script -->
+<script>
+  $("#menu-toggle").click(function () {
+    $("#wrapper").toggleClass("toggled");
+  });
+</script>
+</body>
+</html>
